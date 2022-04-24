@@ -1,14 +1,17 @@
 
 <?php
-session_start();
+// session_start();
 require_once '../../connect/connect.php';
-
+// $level=$_POST['level'];
+// $level=$GET['id'];
+$id_worth=rand(2, 10);
 $numbers = [];
-while (count($numbers) < 4) $numbers[$numb] = ($numb = rand(2, 12));
+while (count($numbers) < 3) $numbers[$numb] = ($numb = rand(2, 12));
 $values = array_values($numbers);
-$name=$_POST['name'];
-$level=$_POST['level'];
-$id_worth=rand(1, 10);
+array_push($values,$id_worth);
+shuffle($values);
+shuffle($values);
+
 $id_worth_2=$values[0];
 $id_worth_3=$values[1];
 $id_worth_4=$values[2];
@@ -38,7 +41,7 @@ mysqli_query($connect,"INSERT INTO `user` (`id_user`, `name`) VALUES (NULL,'$nam
                 $worth = mysqli_query($connect, "SELECT * FROM `worth` WHERE `level`= '$level' AND `id_worth`='$id_worth' ");
                 $worth = mysqli_fetch_all($worth);
                 foreach ($worth as $worth) {  ?>
-                Слово для перевода: <?= $worth[2] ?><br>
+                Слово для перевода: <?= $worth[1] ?><br>
                 
                     <?php } ?>
                     <p>Выберете перевод</p>
